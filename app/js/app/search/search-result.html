@@ -2,7 +2,12 @@
     <ion-tabs
         class="tabs-balanced  tabs-striped tabs-top tabs-background-positive tabs-color-light"
         ng-init="random=false;">
-
+        <button ng-if="!isSaved" id="fab" class="button button-positive button-fab button-fab-bottom-right" ng-click="toggle(true);" style="top:49px;">
+            <i class="icon ion-ios-cloud-download-outline"></i>
+        </button>
+        <button ng-if="isSaved" class="button button-assertive button-fab button-fab-bottom-right" ng-click="toggle(false);" style="top:49px;">
+            <i class="icon ion-close-round"></i>
+        </button>
         <ion-tab title="Word" >
             <!-- Tab 1 content -->
             <ion-view class="active">

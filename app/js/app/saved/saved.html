@@ -27,7 +27,8 @@
             <ion-view>
                 <ion-content>
                     <ion-list>
-                        <ion-item ng-repeat="word in saved track by $index" class="ink">
+                        <ion-item ng-repeat="word in saved track by $index" class="ink" ng-click="goto(word);"
+                                  href="#/app/word/result">
                             {{word.word}}
                             <ion-option-button
                                 class="button button-fab button-assertive icon ion-close"></ion-option-button>
