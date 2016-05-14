@@ -1,0 +1,40 @@
+<ion-view view-title="Search">
+    <ion-content>
+        <div class="list">
+            <label class="item item-input item-md-label" placeholder="Username" highlight-color="balanced" type="text" ng-model="word">
+                <input type="text" ng-model="word">
+                <span class="input-label" ng-model="word">Word</span>
+                <div class="highlight highlight-balanced" ng-model="word"></div>
+            </label>
+            <div class="item item-checkbox">
+                <label class="checkbox"> <input type="checkbox" ng-model="search.audio"> </label>
+                Audio
+            </div>
+            <div class="item item-checkbox">
+                <label class="checkbox"> <input type="checkbox" ng-model="search.pronunciations"> </label>
+                Pronunciations
+            </div>
+            <div class="item item-checkbox">
+                <label class="checkbox"> <input type="checkbox" ng-model="search.examples"> </label>
+                Examples
+            </div>
+            <div class="item item-checkbox">
+                <label class="checkbox"> <input type="checkbox" ng-model="search.definitions"> </label>
+                Definitions
+            </div>
+            <div class="item item-checkbox">
+                <label class="checkbox"> <input type="checkbox" ng-model="search.relatedWords"> </label>
+                RelatedWords
+            </div>
+            <div class="item item-checkbox">
+                <label class="checkbox"> <input type="checkbox" ng-model="search.phrases"> </label>
+                Phrases
+            </div>
+            <!--<div class="item item-checkbox">-->
+                <!--<label class="checkbox"> <input type="checkbox" ng-model="search.etymologies"> </label>-->
+                <!--Etymologies-->
+            <!--</div>-->
+            <button class="button button-block button-calm ink" data-ink-color="#9DEAFF" data-ink-opacity="1" ng-click="find(word);"> Find </button>
+        </div>
+    </ion-content>
+</ion-view>

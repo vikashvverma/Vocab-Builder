@@ -1,0 +1,21 @@
+div.spinner {
+    margin: auto;
+    position: absolute;
+    top: 100px;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: 85px;
+    text-align: center;
+}
+
+.spinner svg {
+    width: 19% !important;
+    height: 85px !important;
+}
+.list .item {
+    border-color: #ddd !important;
+    border-width: 1px !important;
+    border-top-style: solid;
+    border-bottom-style: solid;
+}

@@ -1,0 +1,30 @@
+<div class="spinner" ng-if="!wotd.word">
+    <ion-spinner icon="android"></ion-spinner>
+</div>
+<div class="list card" ng-if="wotd.word">
+
+    <div class="item item-text-wrap">
+        <h2>{{wotd.word}}</h2>
+        <p>
+            {{wotd.pronunciation}}
+            <i class="icon ion-volume-high" on-tap="play();" ng-click="play();" style="margin-left:10px;"
+               ng-if="wotd.audio"></i>
+        </p>
+        <p ng-if="wotd.note">{{wotd.note}}</p>
+    </div>
+
+    <div class="item item-body">
+        <h2 class="positive">Definitions:</h2>
+        <div ng-repeat="item in wotd.definitions">
+            <p><i class="positive ion-arrow-right-c"></i> {{item.partOfSpeech}}</p>
+            <p>{{item.text}}</p>
+            <p>Source: {{item.source}}</p>
+        </div>
+        <h2 class="royal">Examples:</h2>
+        <div ng-repeat="item in wotd.examples">
+            <h2><i class="royal ion-arrow-right-c"></i> {{item.text}}</h2>
+            <cite style="font-size: 12px;font-style: italic;"><i>{{item.title}}</i></cite>
+        </div>
+    </div>
+
+</div>
