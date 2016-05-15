@@ -50,14 +50,6 @@ angular.module('vocabBuilder', ['ionic', 'vocabBuilder.controllers'])
                     }
                 }
             })
-            .state('app.main', {
-                url: '/main',
-                views: {
-                    'home-tab': {
-                        templateUrl: "templates/main.html",
-                    }
-                }
-            })
             .state('app.word', {
                 url: '/word',
                 views: {
@@ -68,8 +60,8 @@ angular.module('vocabBuilder', ['ionic', 'vocabBuilder.controllers'])
                 }
             })
             .state('app.result', {
-                url: '/word/result',
-                cache: false,
+                url: '/word/:id',
+                //cache: false,
                 views: {
                     'menuContent': {
                         templateUrl: 'js/app/search/search-result.html',
@@ -80,7 +72,7 @@ angular.module('vocabBuilder', ['ionic', 'vocabBuilder.controllers'])
 
             .state('app.saved', {
                 url: '/saved',
-                cache: false,
+                //cache: false,
                 views: {
                     'menuContent': {
                         templateUrl: 'js/app/saved/saved.html',
@@ -90,30 +82,11 @@ angular.module('vocabBuilder', ['ionic', 'vocabBuilder.controllers'])
             })
             .state('app.savedWord', {
                 url: '/saved/:id',
-                cache: false,
+                //cache: false,
                 views: {
                     'menuContent': {
                         templateUrl: 'js/app/saved/word.html',
                         controller: 'SavedWordController'
-                    }
-                }
-            })
-            .state('app.playlists', {
-                url: '/playlists',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/playlists.html',
-                        controller: 'PlaylistsCtrl'
-                    }
-                }
-            })
-
-            .state('app.single', {
-                url: '/playlists/:playlistId',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/playlist.html',
-                        controller: 'PlaylistCtrl'
                     }
                 }
             });
