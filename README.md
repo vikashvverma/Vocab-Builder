@@ -44,4 +44,4 @@ Run following commands in sequence
 
 # Support
 
-Drop a mail to `vikash@programminggeek.in` or create an [issue](https://github.com/vikashvverma/ImageLooper/issues/new) in case you run into any trouble
+Drop a mail to `vikash@programminggeek.in` or create an [issue](https://github.com/vikashvverma/Vocab-Builder/issues/new) in case you run into any trouble
