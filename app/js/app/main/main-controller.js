@@ -1,8 +1,12 @@
 angular.module('vocabBuilder.controllers')
 
     .controller('MainController', function ($scope, $log, $timeout, ionicMaterialInk, DictionaryService, HelperService) {
+        $scope.refresh = false;
+        $scope.refreshPage = function () {
+            wordOfTheDay();
+        };
         $scope.random = function () {
-            var d = HelperService.randomDate(new Date(2009, 08, 10), new Date());
+            var d = HelperService.randomDate(new Date(2009, 8, 10), new Date());
             wordOfTheDay({date: d.getFullYear() + "-" + d.getMonth() + "-" + d.getDay()})
         };
         wordOfTheDay();
@@ -15,13 +19,15 @@ angular.module('vocabBuilder.controllers')
         function wordOfTheDay(params) {
             DictionaryService.get('words.json/wordOfTheDay', params)
                 .success(function (data) {
+                    $scope.refresh=false;
                     $scope.wotd = data;
                     DictionaryService.save($scope.wotd);
                     pronunciation($scope.wotd.word);
                     audio($scope.wotd.word);
                 })
                 .error(function (err) {
-                    wordOfTheDay();
+                    $scope.refresh = true;
+                    //wordOfTheDay();
                 });
         }
 

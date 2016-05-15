@@ -1,8 +1,11 @@
 <ion-view view-title="Today's Word">
   <ion-content>
-    <div class="spinner" ng-if="!wotd.word">
+    <div class="spinner" ng-if="!wotd.word && !refresh">
       <ion-spinner icon="android"></ion-spinner>
     </div>
+      <button ng-if="refresh" id="refresh" class="button button-positive button-fab button-fab-bottom-right" ng-click="refreshPage();" style="top:49px;left:0;right:0;margin: 0 auto;">
+          <i class="icon ion-ios-reload"></i>
+      </button>
     <div class="list card" ng-if="wotd.word">
 
       <div class="item item-text-wrap">

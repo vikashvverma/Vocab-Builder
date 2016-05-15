@@ -9,7 +9,7 @@ angular.module('vocabBuilder.controllers')
         if ($scope.result.audio) {
             $scope.audio = new Audio($scope.result.audio);
         }
-        $scope.isSaved = (store.get("results")?store.get("results"):[]).map(function (word) {
+        $scope.isSaved = (store.get("results")?store.get("results"):[]).filter(function (word) {
             return word.word == $scope.result.word;
         }).length;
         $scope.toggle = function (doSave) {

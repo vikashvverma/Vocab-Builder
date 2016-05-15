@@ -1,6 +1,6 @@
 angular.module('vocabBuilder.controllers', ['ionic-material', 'vocabBuilder.services', 'vocabBuilder.helper', 'ngAnimate', 'vAccordion'])
 
-    .controller('AppCtrl', function ($scope, $ionicModal, $timeout, ionicMaterialInk, ionicMaterialMotion) {
+    .controller('AppCtrl', function ($scope, $window, $ionicModal, $timeout, ionicMaterialInk, ionicMaterialMotion) {
 
         // With the new view caching in Ionic, Controllers are only called
         // when they are recreated or on app start, instead of every page change.
@@ -38,6 +38,9 @@ angular.module('vocabBuilder.controllers', ['ionic-material', 'vocabBuilder.serv
             $timeout(function () {
                 $scope.closeLogin();
             }, 1000);
+        };
+        $scope.facebook = function () {
+            $window.open(encodeURI("https://www.facebook.com/vikashvverma"), '_system', 'location=yes');
         };
         ionicMaterialInk.displayEffect();
         //ionicMaterialMotion.ripple();

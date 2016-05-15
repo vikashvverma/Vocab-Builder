@@ -50,8 +50,10 @@
     "test": "grunt test"
   },
   "cordovaPlugins": [
-		"org.apache.cordova.device",
-		"org.apache.cordova.console",
-		"com.ionic.keyboard"
+    "org.apache.cordova.device",
+    "org.apache.cordova.console",
+    "com.ionic.keyboard",
+    "cordova-plugin-whitelist",
+    "https://git-wip-us.apache.org/repos/asf/cordova-plugin-inappbrowser.git"
   ]
 }
