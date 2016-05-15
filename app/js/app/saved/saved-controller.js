@@ -2,11 +2,11 @@ angular.module('vocabBuilder.controllers')
 
     .controller('SavedController', function ($scope, $log, $timeout, $ionicHistory, HelperService, DictionaryService, store, ionicMaterialInk) {
         $scope.words = store.get("words") || [];
-        $scope.saved = store.get("results") || [];
+        $scope.results = store.get("results") || [];
         $scope.shouldShowDelete = false;
         $scope.shouldShowReorder = false;
         $scope.listCanSwipe = true;
-        $scope.remove = function (id) {
+        $scope.removeWord = function (id) {
             var index = -1;
             for (var i = 0; i < $scope.words.length; i++) {
                 if ($scope.words[i].id == id) {
@@ -15,10 +15,22 @@ angular.module('vocabBuilder.controllers')
                 }
             }
             if (index >= 0) {
-                $scope.words.splice(i, 1);
+                $scope.words.splice(index, 1);
             }
             store.set("words", $scope.words);
-            $scope.shouldShowDelete = false;
+        };
+        $scope.removeResult = function (word) {
+            var index = -1;
+            for (var i = 0; i < $scope.results.length; i++) {
+                if ($scope.results[i].word == word) {
+                    index = i;
+                    break;
+                }
+            }
+            if (index >= 0) {
+                $scope.results.splice(index, 1);
+            }
+            store.set("results", $scope.results);
         };
         $scope.goto = function (word) {
             DictionaryService.store(word);

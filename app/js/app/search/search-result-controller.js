@@ -22,7 +22,7 @@ angular.module('vocabBuilder.controllers')
                 }
             }
             if (index >= 0) {
-                results.splice(i, 1);
+                results.splice(index, 1);
             }
             if (doSave) {
                 results.unshift($scope.result);

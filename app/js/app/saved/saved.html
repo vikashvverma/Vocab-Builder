@@ -11,7 +11,7 @@
                         <ion-item ng-repeat="word in words track by $index" class="ink" href="#/app/saved/{{word.id}}">
                             {{word.word}}
                             <ion-option-button class="button button-fab button-assertive icon ion-close"
-                                               ng-click="remove(word.id);"></ion-option-button>
+                                               ng-click="removeWord(word.id);"></ion-option-button>
                         </ion-item>
                     </ion-list>
                     <!--<div class="list" show-delete="shouldShowDelete"-->
@@ -27,11 +27,11 @@
             <ion-view>
                 <ion-content>
                     <ion-list>
-                        <ion-item ng-repeat="word in saved track by $index" class="ink" ng-click="goto(word);"
+                        <ion-item ng-repeat="word in results track by $index" class="ink" ng-click="goto(word);"
                                   href="#/app/word/result">
                             {{word.word}}
                             <ion-option-button
-                                class="button button-fab button-assertive icon ion-close"></ion-option-button>
+                                class="button button-fab button-assertive icon ion-close" ng-click="removeResult(word.word);"></ion-option-button>
                         </ion-item>
                     </ion-list>
                     <!--<div class="list">-->
