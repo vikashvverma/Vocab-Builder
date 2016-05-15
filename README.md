@@ -4,7 +4,7 @@ Vocab Builder helps you build your vocabulary
 
 Download the App at Play Store: https://play.google.com/store/apps/details?id=in.programminggeek.VocabBuilder
 
-Features:
+### Features:
 - phonetics
 - pronunciation
 - definition
