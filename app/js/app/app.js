@@ -60,8 +60,8 @@ angular.module('vocabBuilder', ['ionic', 'vocabBuilder.controllers'])
                 }
             })
             .state('app.result', {
-                url: '/word/:id',
-                //cache: false,
+                url: '/word/result',
+                cache: false,
                 views: {
                     'menuContent': {
                         templateUrl: 'js/app/search/search-result.html',
@@ -72,7 +72,7 @@ angular.module('vocabBuilder', ['ionic', 'vocabBuilder.controllers'])
 
             .state('app.saved', {
                 url: '/saved',
-                //cache: false,
+                cache: false,
                 views: {
                     'menuContent': {
                         templateUrl: 'js/app/saved/saved.html',
@@ -82,7 +82,7 @@ angular.module('vocabBuilder', ['ionic', 'vocabBuilder.controllers'])
             })
             .state('app.savedWord', {
                 url: '/saved/:id',
-                //cache: false,
+                cache: false,
                 views: {
                     'menuContent': {
                         templateUrl: 'js/app/saved/word.html',
