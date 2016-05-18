@@ -89,6 +89,15 @@ angular.module('vocabBuilder', ['ionic', 'vocabBuilder.controllers'])
                         controller: 'SavedWordController'
                     }
                 }
+            }).state('app.spellcheck', {
+                url: '/spellcheck',
+                cache: false,
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/spellcheck.html',
+                        controller: 'SpellCheckController'
+                    }
+                }
             });
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/home');
