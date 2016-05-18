@@ -7,7 +7,7 @@
             <!-- Tab 1 content -->
             <ion-view>
                 <ion-content class="padding">
-                    <span ng-include src="'js/app/words/word-template.html'" ng-controller="MainController"></span>
+                    <span ng-include src="'templates/word-template.html'" ng-controller="MainController"></span>
                 </ion-content>
             </ion-view>
         </ion-tab>
@@ -16,7 +16,7 @@
             <!-- Tab 2 content -->
             <ion-view cache-view="false">
                 <ion-content class="padding">
-                    <span ng-include src="'js/app/words/word-template.html'"
+                    <span ng-include src="'templates/word-template.html'"
                           ng-init="random();" ng-controller="MainController"></span>
                 </ion-content>
             </ion-view>

@@ -35,7 +35,7 @@ angular.module('vocabBuilder', ['ionic', 'vocabBuilder.controllers'])
                 url: '/home',
                 views: {
                     'menuContent': {
-                        templateUrl: 'js/app/main/main.html',
+                        templateUrl: 'templates/main.html',
                         controller: 'MainController'
                     }
                 }
@@ -45,7 +45,7 @@ angular.module('vocabBuilder', ['ionic', 'vocabBuilder.controllers'])
                 cache: false,
                 views: {
                     'menuContent': {
-                        templateUrl: 'js/app/words/words.html',
+                        templateUrl: 'templates/words.html',
                         controller: 'WordsController'
                     }
                 }
@@ -54,7 +54,7 @@ angular.module('vocabBuilder', ['ionic', 'vocabBuilder.controllers'])
                 url: '/word',
                 views: {
                     'menuContent': {
-                        templateUrl: 'js/app/search/search.html',
+                        templateUrl: 'templates/search.html',
                         controller: 'SearchController'
                     }
                 }
@@ -64,7 +64,7 @@ angular.module('vocabBuilder', ['ionic', 'vocabBuilder.controllers'])
                 cache: false,
                 views: {
                     'menuContent': {
-                        templateUrl: 'js/app/search/search-result.html',
+                        templateUrl: 'templates/search-result.html',
                         controller: 'SearchResultController'
                     }
                 }
@@ -75,7 +75,7 @@ angular.module('vocabBuilder', ['ionic', 'vocabBuilder.controllers'])
                 cache: false,
                 views: {
                     'menuContent': {
-                        templateUrl: 'js/app/saved/saved.html',
+                        templateUrl: 'templates/saved.html',
                         controller: 'SavedController'
                     }
                 }
@@ -85,7 +85,7 @@ angular.module('vocabBuilder', ['ionic', 'vocabBuilder.controllers'])
                 cache: false,
                 views: {
                     'menuContent': {
-                        templateUrl: 'js/app/saved/word.html',
+                        templateUrl: 'templates/word.html',
                         controller: 'SavedWordController'
                     }
                 }
