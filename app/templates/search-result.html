@@ -12,7 +12,7 @@
             <!-- Tab 1 content -->
             <ion-view class="active">
                 <ion-content class="padding">
-                    <h2 class="royal">{{result.word}}</h2>
+                    <h2 class="royal" ng-click="speak();">{{result.word}}</h2>
                     <p>
                         {{result.pronunciation}}
                         <i class="icon ion-volume-high" on-tap="play();" ng-click="play();" style="margin-left:10px;"

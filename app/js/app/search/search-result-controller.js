@@ -9,6 +9,17 @@ angular.module('vocabBuilder.controllers')
         if ($scope.result.audio) {
             $scope.audio = new Audio($scope.result.audio);
         }
+        $scope.speak = function () {
+            TTS
+                .speak($scope.result.word, function () {
+                    //alert('success');
+                }, function (reason) {
+                    $HelperService.notify("Could generate voice","error");
+                    //alert(reason);
+                });
+            //var msg = new SpeechSynthesisUtterance($scope.wotd.word);
+            //window.speechSynthesis.speak(msg);
+        };
         $scope.isSaved = (store.get("results")?store.get("results"):[]).filter(function (word) {
             return word.word == $scope.result.word;
         }).length;

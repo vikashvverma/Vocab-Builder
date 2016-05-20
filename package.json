@@ -54,6 +54,7 @@
     "org.apache.cordova.console",
     "com.ionic.keyboard",
     "cordova-plugin-whitelist",
-    "https://git-wip-us.apache.org/repos/asf/cordova-plugin-inappbrowser.git"
+    "https://git-wip-us.apache.org/repos/asf/cordova-plugin-inappbrowser.git",
+    "cordova-plugin-tts"
   ]
 }

@@ -22,7 +22,7 @@ angular.module('vocabBuilder', ['ionic', 'vocabBuilder.controllers'])
         });
     })
 
-    .config(function ($stateProvider, $urlRouterProvider) {
+    .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
         $stateProvider
 
             .state('app', {
@@ -90,15 +90,15 @@ angular.module('vocabBuilder', ['ionic', 'vocabBuilder.controllers'])
                     }
                 }
             }).state('app.spellcheck', {
-                url: '/spellcheck',
-                cache: false,
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/spellcheck.html',
-                        controller: 'SpellCheckController'
-                    }
+            url: '/spellcheck',
+            cache: false,
+            views: {
+                'menuContent': {
+                    templateUrl: 'templates/spellcheck.html',
+                    controller: 'SpellCheckController'
                 }
-            });
+            }
+        });
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/home');
     });

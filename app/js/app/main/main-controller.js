@@ -12,18 +12,42 @@ angular.module('vocabBuilder.controllers')
         wordOfTheDay();
         $scope.play = function () {
             try {
-                $scope.audio ? $scope.audio.play() : undefined;
+                var p=$scope.audio ? $scope.audio.play() : undefined;
+                if (p && (typeof Promise !== 'undefined') && (p instanceof Promise)) {
+                    p.catch(function (e) {
+                        console.log(e);
+                    });
+                }
             } catch (e) {
             }
+        };
+        $scope.translate=function(){
+            DictionaryService.translate('hi',"hello")
+                .success(function(data){
+                    console.log(data);
+                    //$scope.translation=JSON.parse(data)[0][0][0];
+                });
+        };
+        $scope.speak = function () {
+            TTS
+                .speak($scope.wotd.word, function () {
+                    //alert('success');
+                }, function (reason) {
+                    //alert(reason);
+                    $HelperService.notify("Could generate voice","error");
+                });
+            //var msg = new SpeechSynthesisUtterance($scope.wotd.word);
+            //window.speechSynthesis.speak(msg);
         };
         function wordOfTheDay(params) {
             DictionaryService.get('words.json/wordOfTheDay', params)
                 .success(function (data) {
-                    $scope.refresh=false;
+                    $scope.refresh = false;
                     $scope.wotd = data;
                     DictionaryService.save($scope.wotd);
                     pronunciation($scope.wotd.word);
                     audio($scope.wotd.word);
+                    $scope.translate();
                 })
                 .error(function (err) {
                     $scope.refresh = true;

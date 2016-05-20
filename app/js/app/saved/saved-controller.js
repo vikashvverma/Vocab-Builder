@@ -49,6 +49,19 @@ angular.module('vocabBuilder.controllers')
         $scope.play = function () {
             $scope.audio ? $scope.audio.play() : undefined;
         };
+
+        $scope.speak = function () {
+            TTS
+                .speak($scope.wotd.word, function () {
+                    //alert('success');
+                }, function (reason) {
+                    //alert(reason);
+                    $HelperService.notify("Could generate voice","error");
+                });
+            //var msg = new SpeechSynthesisUtterance($scope.wotd.word);
+            //window.speechSynthesis.speak(msg);
+        };
+
         ionicMaterialInk.displayEffect();
         $timeout(function () {
             ionicMaterialInk.displayEffect();
