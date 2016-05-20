@@ -12,7 +12,7 @@ angular.module('vocabBuilder.controllers')
         wordOfTheDay();
         $scope.play = function () {
             try {
-                var p=$scope.audio ? $scope.audio.play() : undefined;
+                var p = $scope.audio ? $scope.audio.play() : undefined;
                 if (p && (typeof Promise !== 'undefined') && (p instanceof Promise)) {
                     p.catch(function (e) {
                         console.log(e);
@@ -21,11 +21,15 @@ angular.module('vocabBuilder.controllers')
             } catch (e) {
             }
         };
-        $scope.translate=function(){
-            DictionaryService.translate('hi',"hello")
-                .success(function(data){
+        $scope.translate = function () {
+            //Line 8641 use try catch AngularJS
+            DictionaryService.translate('hi', $scope.wotd.word)
+                .success(function (data) {
                     console.log(data);
-                    //$scope.translation=JSON.parse(data)[0][0][0];
+                    var trn = data.replace("[[[", "").replace(/"/g, "").split(",")[0];
+                    if (trn != $scope.wotd.word) {
+                        $scope.translation = trn
+                    }
                 });
         };
         $scope.speak = function () {
@@ -34,7 +38,7 @@ angular.module('vocabBuilder.controllers')
                     //alert('success');
                 }, function (reason) {
                     //alert(reason);
-                    $HelperService.notify("Could generate voice","error");
+                    $HelperService.notify("Could not generate voice", "error");
                 });
             //var msg = new SpeechSynthesisUtterance($scope.wotd.word);
             //window.speechSynthesis.speak(msg);

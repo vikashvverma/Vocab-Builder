@@ -10,6 +10,11 @@
             <i class="icon ion-volume-high" on-tap="play();" ng-click="play();" style="margin-left:10px;"
                ng-if="wotd.audio"></i>
         </p>
+        <p>
+                    <span>
+                        <i>trn</i>: {{translation}}
+                    </span>
+        </p>
         <p ng-if="wotd.note">{{wotd.note}}</p>
     </div>
 
