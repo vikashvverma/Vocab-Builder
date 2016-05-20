@@ -81,7 +81,22 @@ angular.module('vocabBuilder.controllers')
                 .error(function (err) {
                 });
         }
-
+        $scope.micon=false;
+        $scope.record = function () {
+            var recognition = new SpeechRecognition();
+            recognition.onresult = function (event) {
+                if (event.results.length > 0) {
+                    $scope.recognizedText = event.results[0][0].transcript;
+                    $scope.$apply()
+                }
+                $scope.micon=true;
+            };
+            recognition.start();
+            recognition.onend = function () {
+                $scope.micon=false;
+            };
+            $scope.micon=true;
+        };
         $timeout(function () {
             ionicMaterialInk.displayEffect();
         }, 0);

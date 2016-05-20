@@ -55,6 +55,7 @@
     "com.ionic.keyboard",
     "cordova-plugin-whitelist",
     "https://git-wip-us.apache.org/repos/asf/cordova-plugin-inappbrowser.git",
-    "cordova-plugin-tts"
+    "cordova-plugin-tts",
+    "https://github.com/macdonst/SpeechRecognitionPlugin"
   ]
 }

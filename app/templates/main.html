@@ -10,16 +10,25 @@
         <div class="list card" ng-if="wotd.word">
 
             <div class="item item-text-wrap">
-                <h2 ng-click="speak();">{{wotd.word}}</h2>
-                <p>
+                <p style="font-size: 35px;line-height: 35px; letter-spacing: 0.1px; ">
+                    <span ng-click="speak();" class="positive" style="margin-right: 10px;">{{wotd.word}}</span>
+                    <i class="icon ion-ios-mic positive" ng-click="record();" ng-if="micon"></i>
+                    <i class="icon ion-ios-mic-off assertive" ng-click="record();" ng-if="!micon" ></i>
+                </p>
+                <p style="font-size: 20px; letter-spacing: 0.1px; ">
                     {{wotd.pronunciation}}
                     <i class="icon ion-volume-high" on-tap="play();" ng-click="play();" style="margin-left:10px;"
                        ng-if="wotd.audio"></i>
                 </p>
-                <p>
-                    <span>
+                <p ng-if="translation">
+                    <span class="royal">
                         <i>trn</i>: {{translation}}
                     </span>
+                </p>
+                <p>
+                        <span ng-if="recognizedText" class="calm">
+                            <i>Recognized Text</i>: <span class="royal">{{recognizedText}}</span>
+                        </span>
                 </p>
                 <p ng-if="wotd.note">{{wotd.note}}</p>
             </div>

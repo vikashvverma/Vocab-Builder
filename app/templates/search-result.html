@@ -2,35 +2,48 @@
     <ion-tabs
         class="tabs-balanced  tabs-striped tabs-top tabs-background-positive tabs-color-light"
         ng-init="random=false;">
-        <button ng-if="!isSaved" id="fab" class="button button-positive button-fab button-fab-bottom-right" ng-click="toggle(true);" style="top:49px;">
+        <button ng-if="!isSaved" id="fab" class="button button-positive button-fab button-fab-bottom-right"
+                ng-click="toggle(true);" style="top:49px;">
             <i class="icon ion-ios-cloud-download-outline"></i>
         </button>
-        <button ng-if="isSaved" class="button button-assertive button-fab button-fab-bottom-right" ng-click="toggle(false);" style="top:49px;">
+        <button ng-if="isSaved" class="button button-assertive button-fab button-fab-bottom-right"
+                ng-click="toggle(false);" style="top:49px;">
             <i class="icon ion-close-round"></i>
         </button>
-        <ion-tab title="Word" >
+        <ion-tab title="Word">
             <!-- Tab 1 content -->
             <ion-view class="active">
                 <ion-content class="padding">
-                    <h2 class="royal" ng-click="speak();">{{result.word}}</h2>
+                    <!--<h2 class="royal" ng-click="speak();">{{result.word}}</h2>-->
+                    <p style="font-size: 35px;line-height: 35px; letter-spacing: 0.1px; ">
+                        <span ng-click="speak();" class="positive" style="margin-right: 10px;">{{result.word}}</span>
+                        <i class="icon ion-ios-mic positive" ng-click="record();" ng-if="micon"></i>
+                        <i class="icon ion-ios-mic-off assertive" ng-click="record();" ng-if="!micon"></i>
+                    </p>
                     <p>
                         {{result.pronunciation}}
                         <i class="icon ion-volume-high" on-tap="play();" ng-click="play();" style="margin-left:10px;"
                            ng-if="result.audio"></i>
+                    </p>
+                    <p>
+                        <span ng-if="recognizedText" class="calm">
+                            <i>Recognized Text</i>: <span class="royal">{{recognizedText}}</span>
+                        </span>
                     </p>
                     <p ng-if="result.note">{{result.note}}</p>
                     <p ng-if="result.etymologies">{{result.etymologies[0]}}</p>
                 </ion-content>
             </ion-view>
         </ion-tab>
-        <ion-tab ng-if="result.examples" title="Examples" >
-            <!-- Tab 1 content -->
+        <ion-tab ng-if="result.examples" title="Examples">
+            <!-- Tab 2 content -->
             <ion-view>
                 <ion-content class="padding">
                     <h2 class="royal">Examples:</h2>
                     <div ng-repeat="item in result.examples">
                         <h5 ng-if="item.text"><i class="royal ion-arrow-right-c"></i> {{item.text}}</h5>
-                        <cite style="font-size: 12px;font-style: italic;" ng-if="item.title"><i>{{item.title}}</i></cite>
+                        <cite style="font-size: 12px;font-style: italic;"
+                              ng-if="item.title"><i>{{item.title}}</i></cite>
                     </div>
                 </ion-content>
             </ion-view>
@@ -50,7 +63,7 @@
             </ion-view>
         </ion-tab>
 
-        <ion-tab ng-if="result.relatedWords" title="Related" >
+        <ion-tab ng-if="result.relatedWords" title="Related">
             <!-- Tab 2 content -->
             <ion-view cache-view="false" id="related-words">
                 <ion-content class="padding">
@@ -77,7 +90,7 @@
             </ion-view>
         </ion-tab>
 
-        <ion-tab ng-if="result.phrases" title="Phrases" >
+        <ion-tab ng-if="result.phrases" title="Phrases">
             <!-- Tab 2 content -->
             <ion-view cache-view="false">
                 <ion-content class="padding">

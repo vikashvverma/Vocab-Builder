@@ -20,6 +20,21 @@ angular.module('vocabBuilder.controllers')
             //var msg = new SpeechSynthesisUtterance($scope.wotd.word);
             //window.speechSynthesis.speak(msg);
         };
+        $scope.record = function () {
+            var recognition = new SpeechRecognition();
+            recognition.onresult = function (event) {
+                if (event.results.length > 0) {
+                    $scope.recognizedText = event.results[0][0].transcript;
+                    $scope.$apply()
+                }
+                $scope.micon=true;
+            };
+            recognition.start();
+            recognition.onend = function () {
+                $scope.micon=false;
+            };
+            $scope.micon=true;
+        };
         $scope.isSaved = (store.get("results")?store.get("results"):[]).filter(function (word) {
             return word.word == $scope.result.word;
         }).length;

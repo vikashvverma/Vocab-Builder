@@ -45,8 +45,8 @@ angular.module('vocabBuilder', ['ionic', 'vocabBuilder.controllers'])
                 cache: false,
                 views: {
                     'menuContent': {
-                        templateUrl: 'templates/words.html',
-                        controller: 'WordsController'
+                        templateUrl: 'templates/words.html'
+                        //controller: 'WordsController'
                     }
                 }
             })
