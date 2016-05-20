@@ -11,7 +11,8 @@ angular.module('vocabBuilder.controllers')
                     {
                         success: function (errorCount) {
                             if (errorCount == 0) {
-                                alert("No writing errors were found");
+                                //alert("No writing errors were found");
+                                HelperService.notify("No writing errors were found", "info");
                             }
                         },
 
@@ -28,4 +29,13 @@ angular.module('vocabBuilder.controllers')
     });
 
 
+/*
+ //Dummy text
 
+ The purpoce of a spell checker is to check the text four spelling and typeing errors.
+ The checker finds errors througout the text.
+
+ When the spell checker finds an questionable word, it highlights it and suggests the mpst
+ likely variants too replace the questionable word. You can select the variant and replace
+ the wrrd or leave the word unanged.
+ */
