@@ -18,9 +18,12 @@
             <i class="icon ion-volume-high" on-tap="play();" ng-click="play();" style="margin-left:10px;"
                ng-if="wotd.audio"></i>
         </p>
-        <p ng-if="translation">
+        <p ng-if="translation.length">
                     <span class="royal">
-                        <i>trn</i>: {{translation}}
+                        <i>trn</i>:
+                        <span ng-repeat="trn in translation track by $index">
+                            {{trn.trn}}({{trn.lan}})
+                        </span>
                     </span>
         </p>
         <p>

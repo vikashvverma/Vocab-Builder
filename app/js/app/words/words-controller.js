@@ -2,16 +2,14 @@ angular.module('vocabBuilder.controllers')
 
     .controller('WordsController', function ($scope) {
     })
-    .controller('RandomController', function ($scope, $log, $timeout, ionicMaterialInk, DictionaryService, HelperService) {
+    .controller('RandomController', function ($scope, $log, $timeout, ionicMaterialInk, DictionaryService, HelperService, store) {
         $scope.refresh = false;
-        $scope.refreshPage = function () {
-            wordOfTheDay();
-        };
+        $scope.translation = [];
         $scope.random = function () {
             var d = HelperService.randomDate(new Date(2009, 8, 10), new Date());
             wordOfTheDay({date: d.getFullYear() + "-" + d.getMonth() + "-" + d.getDay()})
         };
-        wordOfTheDay();
+        $scope.random();
         $scope.play = function () {
             try {
                 var p = $scope.audio ? $scope.audio.play() : undefined;
@@ -23,14 +21,24 @@ angular.module('vocabBuilder.controllers')
             } catch (e) {
             }
         };
-        $scope.translate = function () {
+        $scope.translate = function (word) {
             //Line 8641 use try catch AngularJS
-            DictionaryService.translate('hi', $scope.wotd.word)
+            $scope.translation = [];
+            var pres = store.get("preferences");
+            for (var i = 0; i < pres.trns.length; i++) {
+                if (pres.trns[i].isChecked) {
+                    trans(pres.trns[i], word)
+                }
+            }
+        };
+        function trans(lan, word) {
+            DictionaryService.translate(lan.code, word)
                 .success(function (data) {
                     console.log(data);
                     var trn = data.replace("[[[", "").replace(/"/g, "").split(",")[0];
-                    if (trn != $scope.wotd.word) {
-                        $scope.translation = trn
+                    var ori = data.replace("[[[", "").replace(/"/g, "").split(",")[1];
+                    if (trn != $scope.wotd.word && $scope.wotd.word == ori) {
+                        $scope.translation.push({trn: trn, lan: lan.title});
                     }
                 });
         };
@@ -56,7 +64,7 @@ angular.module('vocabBuilder.controllers')
                     DictionaryService.save($scope.wotd);
                     pronunciation($scope.wotd.word);
                     audio($scope.wotd.word);
-                    $scope.translate();
+                    $scope.translate($scope.wotd.word);
                 })
                 .error(function (err) {
                     $scope.refresh = true;

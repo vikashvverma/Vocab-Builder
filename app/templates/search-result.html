@@ -25,6 +25,14 @@
                         <i class="icon ion-volume-high" on-tap="play();" ng-click="play();" style="margin-left:10px;"
                            ng-if="result.audio"></i>
                     </p>
+                    <p ng-if="translation.length">
+                    <span class="royal">
+                        <i>trn</i>:
+                        <span ng-repeat="trn in translation track by $index">
+                            {{trn.trn}}({{trn.lan}})
+                        </span>
+                    </span>
+                    </p>
                     <p>
                         <span ng-if="recognizedText" class="calm">
                             <i>Recognized Text</i>: <span class="royal">{{recognizedText}}</span>

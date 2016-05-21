@@ -2,6 +2,7 @@ angular.module('vocabBuilder.controllers')
 
     .controller('SearchResultController', function ($scope, $log, $timeout, $ionicHistory, HelperService, DictionaryService, store) {
         $scope.result = DictionaryService.retrieve();
+        $scope.translation = [];
         if (!$scope.result && !$scope.result.word) {
             HelperService.notify("Could not find any result!", "info");
             $ionicHistory.goBack();
@@ -13,13 +14,13 @@ angular.module('vocabBuilder.controllers')
             //Try Cordova Plugin API
             try {
                 TTS
-                    .speak($scope.wotd.word, function () {
+                    .speak($scope.result.word, function () {
                     }, function (reason) {
                         HelperService.notify("Could not generate voice", "error");
                     });
             } catch (e) {
                 // Fallback to browser API
-                var msg = new SpeechSynthesisUtterance($scope.wotd.word);
+                var msg = new SpeechSynthesisUtterance($scope.result.word);
                 window.speechSynthesis.speak(msg);
             }
         };
@@ -75,6 +76,27 @@ angular.module('vocabBuilder.controllers')
         $scope.play = function () {
             $scope.audio.play()
         };
+        $scope.translate = function () {
+            //Line 8641 use try catch AngularJS
+            var pres = store.get("preferences");
+            for (var i = 0; i < pres.trns.length; i++) {
+                if (pres.trns[i].isChecked) {
+                    trans(pres.trns[i])
+                }
+            }
+        };
+        function trans(lan) {
+            DictionaryService.translate(lan.code, $scope.result.word)
+                .success(function (data) {
+                    console.log(data);
+                    var trn = data.replace("[[[", "").replace(/"/g, "").split(",")[0];
+                    var ori = data.replace("[[[", "").replace(/"/g, "").split(",")[1];
+                    if (trn != $scope.result.word && $scope.result.word == ori) {
+                        $scope.translation.push({trn: trn, lan: lan.title});
+                    }
+                });
+        };
+        $scope.translate();
         $scope.expandCallback = function (index, id) {
             $('#related-words #type' + index).show(1000);
         };

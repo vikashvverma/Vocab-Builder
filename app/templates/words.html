@@ -14,7 +14,7 @@
 
         <ion-tab title="Random Word" icon-on="ion-ios-shuffle-strong" icon-off="ion-ios-shuffle-strong" >
             <!-- Tab 2 content -->
-            <ion-view cache-view="false">
+            <ion-view cache-view="false" active>
                 <ion-content class="padding">
                     <span ng-include src="'templates/word-template.html'"
                           ng-init="random();" ng-controller="RandomController"></span>

@@ -64,7 +64,14 @@ angular.module('vocabBuilder.controllers')
             //window.speechSynthesis.speak(msg);
         };
         $scope.record = function () {
-            var recognition = new SpeechRecognition();
+            var recognition;
+            //Try HTML5 API
+            if (webkitSpeechRecognition) {
+                recognition = new webkitSpeechRecognition()
+            } else {
+                //Fallback to cordova plugin
+                recognition = new SpeechRecognition();
+            }
             recognition.onresult = function (event) {
                 if (event.results.length > 0) {
                     $scope.recognizedText = event.results[0][0].transcript;

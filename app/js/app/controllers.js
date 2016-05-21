@@ -97,22 +97,26 @@ angular.module('vocabBuilder.controllers', [
 
             }
         ];
-        $scope.pres = {
-            trns: [
-                {code: 'hi', title: "Hindi", isChecked: true},
-                {code: 'bn', title: "Bengali", isChecked: false},
-                {code: 'gu', title: "Gujarati", isChecked: false},
-                {code: 'ur', title: "Urdu", isChecked: false},
-                {code: 'te', title: "Telugu", isChecked: false},
-                {code: 'ta', title: "Tamil", isChecked: false},
-                {code: 'ka', title: "Kannada", isChecked: false},
-                {code: 'ja', title: "Japanese", isChecked: false},
-                {code: 'fr', title: "French", isChecked: false},
-                {code: 'de', title: "German", isChecked: false}
-            ]
-        };
+        var pres = store.get("preferences");
+        $scope.pres = pres || {
+                trns: [
+                    {code: 'hi', title: "Hindi", isChecked: true},
+                    {code: 'bn', title: "Bengali", isChecked: false},
+                    {code: 'gu', title: "Gujarati", isChecked: false},
+                    {code: 'ur', title: "Urdu", isChecked: false},
+                    {code: 'te', title: "Telugu", isChecked: false},
+                    {code: 'ta', title: "Tamil", isChecked: false},
+                    {code: 'ka', title: "Kannada", isChecked: false},
+                    {code: 'ja', title: "Japanese", isChecked: false},
+                    {code: 'fr', title: "French", isChecked: false},
+                    {code: 'de', title: "German", isChecked: false}
+                ]
+            };
         $scope.save = function () {
             $scope.preferences.hide();
+            console.log("Preferences: ", $scope.pres);
+            store.set("preferences", $scope.pres);
+            HelperService.notify("Preferences saved!", "info");
         };
         $timeout(function () {
             ionicMaterialInk.displayEffect();

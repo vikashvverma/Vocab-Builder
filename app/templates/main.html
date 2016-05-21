@@ -13,16 +13,19 @@
                 <p style="font-size: 35px;line-height: 35px; letter-spacing: 0.1px; ">
                     <span ng-click="speak();" class="positive" style="margin-right: 10px;">{{wotd.word}}</span>
                     <i class="icon ion-ios-mic positive" ng-click="record();" ng-if="micon"></i>
-                    <i class="icon ion-ios-mic-off assertive" ng-click="record();" ng-if="!micon" ></i>
+                    <i class="icon ion-ios-mic-off assertive" ng-click="record();" ng-if="!micon"></i>
                 </p>
                 <p style="font-size: 20px; letter-spacing: 0.1px; ">
                     {{wotd.pronunciation}}
                     <i class="icon ion-volume-high" on-tap="play();" ng-click="play();" style="margin-left:10px;"
                        ng-if="wotd.audio"></i>
                 </p>
-                <p ng-if="translation">
+                <p ng-if="translation.length">
                     <span class="royal">
-                        <i>trn</i>: {{translation}}
+                        <i>trn</i>:
+                        <span ng-repeat="trn in translation track by $index">
+                            {{trn.trn}}({{trn.lan}})
+                        </span>
                     </span>
                 </p>
                 <p>

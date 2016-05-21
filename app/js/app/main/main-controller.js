@@ -1,7 +1,8 @@
 angular.module('vocabBuilder.controllers')
 
-    .controller('MainController', function ($scope, $log, $timeout, ionicMaterialInk, DictionaryService, HelperService) {
+    .controller('MainController', function ($scope, $log, $timeout, ionicMaterialInk, DictionaryService, HelperService, store) {
         $scope.refresh = false;
+        $scope.translation = [];
         $scope.refreshPage = function () {
             wordOfTheDay();
         };
@@ -23,12 +24,20 @@ angular.module('vocabBuilder.controllers')
         };
         $scope.translate = function () {
             //Line 8641 use try catch AngularJS
-            DictionaryService.translate('hi', $scope.wotd.word)
+            var pres = store.get("preferences");
+            for (var i = 0; i < pres.trns.length; i++) {
+                if (pres.trns[i].isChecked) {
+                    trans(pres.trns[i])
+                }
+            }
+        };
+        function trans(lan) {
+            DictionaryService.translate(lan.code, $scope.wotd.word)
                 .success(function (data) {
                     console.log(data);
                     var trn = data.replace("[[[", "").replace(/"/g, "").split(",")[0];
                     if (trn != $scope.wotd.word) {
-                        $scope.translation = trn
+                    $scope.translation.push({trn: trn, lan: lan.title});
                     }
                 });
         };
