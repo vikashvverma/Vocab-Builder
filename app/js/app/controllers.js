@@ -47,7 +47,7 @@ angular.module('vocabBuilder.controllers', [
             store.remove('token');
             $scope.closePopover();
             $scope.auth = undefined;
-            $scope.apply();
+            $scope.$apply();
         };
 
         $scope.facebook = function () {
