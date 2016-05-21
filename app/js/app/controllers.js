@@ -47,6 +47,7 @@ angular.module('vocabBuilder.controllers', [
             store.remove('token');
             $scope.closePopover();
             $scope.auth = undefined;
+            HelperService.notify("You have been logged out!", "info");
         };
 
         $scope.facebook = function () {
@@ -96,7 +97,7 @@ angular.module('vocabBuilder.controllers', [
 
             }
         ];
-        $scope.pres= {
+        $scope.pres = {
             trns: [
                 {code: 'hi', title: "Hindi", isChecked: true},
                 {code: 'bn', title: "Bengali", isChecked: false},
@@ -110,7 +111,7 @@ angular.module('vocabBuilder.controllers', [
                 {code: 'de', title: "German", isChecked: false}
             ]
         };
-        $scope.save=function(){
+        $scope.save = function () {
             $scope.preferences.hide();
         };
         $timeout(function () {

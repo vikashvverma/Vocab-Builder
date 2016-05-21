@@ -10,32 +10,43 @@ angular.module('vocabBuilder.controllers')
             $scope.audio = new Audio($scope.result.audio);
         }
         $scope.speak = function () {
-            TTS
-                .speak($scope.result.word, function () {
-                    //alert('success');
-                }, function (reason) {
-                    $HelperService.notify("Could generate voice","error");
-                    //alert(reason);
-                });
-            //var msg = new SpeechSynthesisUtterance($scope.wotd.word);
-            //window.speechSynthesis.speak(msg);
+            //Try Cordova Plugin API
+            try {
+                TTS
+                    .speak($scope.wotd.word, function () {
+                    }, function (reason) {
+                        HelperService.notify("Could not generate voice", "error");
+                    });
+            } catch (e) {
+                // Fallback to browser API
+                var msg = new SpeechSynthesisUtterance($scope.wotd.word);
+                window.speechSynthesis.speak(msg);
+            }
         };
         $scope.record = function () {
-            var recognition = new SpeechRecognition();
+            var recognition;
+            //Try HTML5 API
+            if (webkitSpeechRecognition) {
+                recognition = new webkitSpeechRecognition()
+            } else {
+                //Fallback to cordova plugin
+                recognition = new SpeechRecognition();
+            }
             recognition.onresult = function (event) {
                 if (event.results.length > 0) {
                     $scope.recognizedText = event.results[0][0].transcript;
                     $scope.$apply()
                 }
-                $scope.micon=true;
+                $scope.micon = true;
             };
             recognition.start();
             recognition.onend = function () {
-                $scope.micon=false;
+                $scope.micon = false;
+                $scope.$apply();
             };
-            $scope.micon=true;
+            $scope.micon = true;
         };
-        $scope.isSaved = (store.get("results")?store.get("results"):[]).filter(function (word) {
+        $scope.isSaved = (store.get("results") ? store.get("results") : []).filter(function (word) {
             return word.word == $scope.result.word;
         }).length;
         $scope.toggle = function (doSave) {
