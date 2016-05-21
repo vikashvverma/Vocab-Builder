@@ -1,0 +1,20 @@
+{
+  "name": "google-tts",
+  "version": "1.0.1",
+  "main": "google-tts.min.js",
+  "ignore": [
+    "**/.*",
+    "node_modules"
+  ],
+  "homepage": "https://github.com/hiddentao/google-tts",
+  "_release": "1.0.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "1.0.1",
+    "commit": "e456ca59fe9731bb4cb401009da5cf1e919dbe3f"
+  },
+  "_source": "https://github.com/hiddentao/google-tts.git",
+  "_target": "^1.0.1",
+  "_originalSource": "google-tts",
+  "_direct": true
+}

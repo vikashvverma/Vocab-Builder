@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no, width=device-width">
+    <title></title>
+
+    <!-- build:css styles/vendor.css -->
+    <!-- bower:css -->
+    <link rel="stylesheet" href="bower_components/ionic/release/css/ionic.css" />
+    <link rel="stylesheet" href="bower_components/waves/dist/waves.min.css" />
+    <link rel="stylesheet" href="bower_components/ionic-material/dist/ionic.material.css" />
+    <link rel="stylesheet" href="bower_components/ionic-material/dist/ionic.material.min.css" />
+    <link rel="stylesheet" href="bower_components/ng-notify/src/styles/ng-notify.css" />
+    <link rel="stylesheet" href="bower_components/v-accordion/dist/v-accordion.css" />
+    <!-- endbower -->
+    <!-- endbuild -->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/menu.css" rel="stylesheet">
+    <link href="css/atd.css" rel="stylesheet">
+    <link href="css/app.css" rel="stylesheet">
+
+    <!-- IF using Sass (run gulp sass first), then uncomment below and remove the CSS includes above
+    <link href="styles/ionic.app.css" rel="stylesheet">
+    -->
+
+    <!-- ionic/angularjs js -->
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="bower_components/jquery/dist/jquery.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/ionic/release/js/ionic.js"></script>
+    <script src="bower_components/ionic/release/js/ionic-angular.js"></script>
+    <script src="bower_components/ngCordova/dist/ng-cordova.js"></script>
+    <script src="bower_components/waves/dist/waves.min.js"></script>
+    <script src="bower_components/ionic-material/dist/ionic.material.js"></script>
+    <script src="bower_components/ionic-material/dist/ionic.material.min.js"></script>
+    <script src="bower_components/a0-angular-storage/dist/angular-storage.js"></script>
+    <script src="bower_components/ng-notify/src/scripts/ng-notify.js"></script>
+    <script src="bower_components/v-accordion/dist/v-accordion.js"></script>
+    <script src="bower_components/auth0.js/build/auth0.js"></script>
+    <script src="bower_components/auth0-lock/build/auth0-lock.js"></script>
+    <script src="bower_components/auth0-angular/build/auth0-angular.js"></script>
+    <script src="bower_components/angular-jwt/dist/angular-jwt.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+    <!-- lib -->
+    <!--<script src="js/lib/jquery.atd.js"></script>-->
+    <script src="js/lib/jquery.atd.js"></script>
+    <script src="js/lib/csshttprequest.js"></script>
+    <!-- endlib -->
+
+    <!-- cordova script (this will be a 404 during development) -->
+    <script src="cordova.js"></script>
+
+    <!-- your app's js -->
+    <!-- build:js scripts/scripts.js -->
+    <script src="js/components/vocab-service.js"></script>
+    <script src="js/components/helper-service.js"></script>
+    <script src="js/app/controllers.js"></script>
+    <script src="js/app/main/main-controller.js"></script>
+    <script src="js/app/words/words-controller.js"></script>
+    <script src="js/app/search/search-controller.js"></script>
+    <script src="js/app/search/search-result-controller.js"></script>
+    <script src="js/app/saved/saved-controller.js"></script>
+    <script src="js/app/spellcheck/spellcheck-controller.js"></script>
+    <script src="js/app/app.js"></script>
+    <script src="scripts/configuration.js"></script>
+    <!-- endbuild -->
+</head>
+
+<body ng-app="vocabBuilder">
+<ion-nav-view></ion-nav-view>
+</body>
+</html>

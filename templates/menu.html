@@ -1,0 +1,66 @@
+<ion-side-menus enable-menu-with-back-views="false">
+    <ion-side-menu-content>
+        <ion-nav-bar class="bar-positive">
+            <ion-nav-back-button>
+            </ion-nav-back-button>
+            <ion-nav-buttons side="left">
+                <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+                </button>
+            </ion-nav-buttons>
+            <div class="buttons buttons-right header-item" style="float: right;" ng-if="auth && auth.isAuthenticated" ng-click="openPopover($event)">
+                    <span class="right-buttons">
+                        <button class="button button-calm button-fab">
+                            <i class="icon ion-person"></i>
+                        </button>
+                    </span>
+            </div>
+            <div class="buttons buttons-right header-item" style="float: right;" ng-click="login();" ng-if="!auth">
+                    <span class="right-buttons">
+                        <button class="button button-calm button-fab">
+                            <i class="icon ion-log-in"></i>
+                        </button>
+                    </span>
+            </div>
+        </ion-nav-bar>
+        <ion-nav-view name="menuContent"></ion-nav-view>
+    </ion-side-menu-content>
+
+    <button id="fab" class="button button-positive button-fab button-fab-bottom-right" ng-click="facebook();">
+        <i class="icon ion-social-facebook"></i>
+    </button>
+
+    <ion-side-menu side="left">
+        <ion-header-bar class="expanded bar bar-header disable-user-behavior">
+            <img src="img/logo.png" class="avatar motion spin fade">
+            <div class="menu-bottom">
+                Vocab Builder
+            </div>
+        </ion-header-bar>
+        <ion-content class="stable-bg has-expanded-header scroll-content ionic-scroll  has-header">
+            <ion-list>
+                <ion-item menu-close href="#/app/home" class="positive ink">
+                    Home
+                </ion-item>
+                <ion-item menu-close href="#/app/words" class="positive ink">
+                    Words
+                </ion-item>
+                <ion-item menu-close href="#/app/word" class="positive ink">
+                    Search
+                </ion-item>
+                <ion-item menu-close href="#/app/saved" class="positive ink">
+                    Saved
+                </ion-item>
+                <ion-item menu-close href="#/app/spellcheck" class="positive ink">
+                    Spellcheck
+                </ion-item>
+                <!--<ion-item menu-close ng-click="login()" class="positive ink">-->
+                    <!--Login-->
+                <!--</ion-item>-->
+                <!--<ion-item menu-close href="#/app/playlists" class="positive ink">-->
+                <!--Playlists-->
+                <!--</ion-item>-->
+            </ion-list>
+        </ion-content>
+    </ion-side-menu>
+</ion-side-menus>
+
