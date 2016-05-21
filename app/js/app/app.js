@@ -4,9 +4,15 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('vocabBuilder', ['ionic', 'vocabBuilder.controllers'])
+angular.module('vocabBuilder', [
+        'ionic',
+        'vocabBuilder.controllers',
+        'auth0',
+        'angular-storage',
+        'angular-jwt'
+    ])
 
-    .run(function ($ionicPlatform) {
+    .run(function ($ionicPlatform, auth) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -20,9 +26,11 @@ angular.module('vocabBuilder', ['ionic', 'vocabBuilder.controllers'])
                 StatusBar.styleDefault();
             }
         });
+        // This hooks all auth events to check everything as soon as the app starts
+        auth.hookEvents();
     })
 
-    .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
+    .config(function ($stateProvider, $urlRouterProvider, authProvider, $httpProvider, jwtInterceptorProvider) {
         $stateProvider
 
             .state('app', {
@@ -89,16 +97,32 @@ angular.module('vocabBuilder', ['ionic', 'vocabBuilder.controllers'])
                         controller: 'SavedWordController'
                     }
                 }
-            }).state('app.spellcheck', {
-            url: '/spellcheck',
-            cache: false,
-            views: {
-                'menuContent': {
-                    templateUrl: 'templates/spellcheck.html',
-                    controller: 'SpellCheckController'
+            })
+            .state('app.spellcheck', {
+                url: '/spellcheck',
+                cache: false,
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/spellcheck.html',
+                        controller: 'SpellCheckController'
+                    }
                 }
-            }
-        });
+            })
+            .state('login', { // Notice: this state name matches the loginState property value to set in authProvider.init({...}) below...
+                url: '/login',
+                views: {
+                    'menuContent': {
+                        templateUrl: 'templates/login.html',
+                        controller: 'LoginCtrl'
+                    }
+                }
+            });
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/home');
+
+        authProvider.init({
+            domain: 'programminggeek.auth0.com',
+            clientID: 'YL6wNwYgl1kz2fnDoscdByFj8MoQnzwK',
+            loginState: 'login' // This is the name of the state where you'll show the login, which is defined above...
+        });
     });

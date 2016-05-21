@@ -1,6 +1,15 @@
-angular.module('vocabBuilder.controllers', ['ionic-material', 'vocabBuilder.services', 'vocabBuilder.helper', 'ngAnimate', 'vAccordion'])
+angular.module('vocabBuilder.controllers', [
+        'ionic-material',
+        'vocabBuilder.services',
+        'vocabBuilder.helper',
+        'ngAnimate',
+        'vAccordion',
+        'auth0',
+        'angular-storage',
+        'angular-jwt'
+    ])
 
-    .controller('AppCtrl', function ($scope, $window, $ionicModal, $timeout, ionicMaterialInk, ionicMaterialMotion) {
+    .controller('AppCtrl', function ($scope, $window, $ionicModal, $timeout, ionicMaterialInk, ionicMaterialMotion, store, $location, auth) {
 
         // With the new view caching in Ionic, Controllers are only called
         // when they are recreated or on app start, instead of every page change.
@@ -26,7 +35,21 @@ angular.module('vocabBuilder.controllers', ['ionic-material', 'vocabBuilder.serv
 
         // Open the login modal
         $scope.login = function () {
-            $scope.modal.show();
+            //$scope.modal.show();
+                auth.signin({
+                    authParams: {
+                        scope: 'openid offline_access',
+                        device: 'Mobile device'
+                    }
+                }, function (profile, token, accessToken, state, refreshToken) {
+                    // Success callback
+                    store.set('profile', profile);
+                    store.set('token', token);
+                    store.set('refreshToken', refreshToken);
+                    $location.path('/');
+                }, function () {
+                    // Error callback
+                });
         };
 
         // Perform the login action when the user submits the login form
@@ -57,5 +80,22 @@ angular.module('vocabBuilder.controllers', ['ionic-material', 'vocabBuilder.serv
         ];
     })
 
-    .controller('PlaylistCtrl', function ($scope, $stateParams) {
+
+    .controller('LoginCtrl', function (store, $scope, $location, auth) {
+        $scope.login = function () {
+            auth.signin({
+                authParams: {
+                    scope: 'openid offline_access',
+                    device: 'Mobile device'
+                }
+            }, function (profile, token, accessToken, state, refreshToken) {
+                // Success callback
+                store.set('profile', profile);
+                store.set('token', token);
+                store.set('refreshToken', refreshToken);
+                $location.path('/');
+            }, function () {
+                // Error callback
+            });
+        }
     });
