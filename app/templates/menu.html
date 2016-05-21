@@ -7,6 +7,20 @@
                 <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
                 </button>
             </ion-nav-buttons>
+            <div class="buttons buttons-right header-item" style="float: right;" ng-if="auth && auth.isAuthenticated" ng-click="openPopover($event)">
+                    <span class="right-buttons">
+                        <button class="button button-calm button-fab">
+                            <i class="icon ion-person"></i>
+                        </button>
+                    </span>
+            </div>
+            <div class="buttons buttons-right header-item" style="float: right;" ng-click="login();" ng-if="!auth">
+                    <span class="right-buttons">
+                        <button class="button button-calm button-fab">
+                            <i class="icon ion-log-in"></i>
+                        </button>
+                    </span>
+            </div>
         </ion-nav-bar>
         <ion-nav-view name="menuContent"></ion-nav-view>
     </ion-side-menu-content>
@@ -39,9 +53,9 @@
                 <ion-item menu-close href="#/app/spellcheck" class="positive ink">
                     Spellcheck
                 </ion-item>
-                <ion-item menu-close ng-click="login()" class="positive ink">
-                    Login
-                </ion-item>
+                <!--<ion-item menu-close ng-click="login()" class="positive ink">-->
+                    <!--Login-->
+                <!--</ion-item>-->
                 <!--<ion-item menu-close href="#/app/playlists" class="positive ink">-->
                 <!--Playlists-->
                 <!--</ion-item>-->

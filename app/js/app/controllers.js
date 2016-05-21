@@ -9,7 +9,7 @@ angular.module('vocabBuilder.controllers', [
         'angular-jwt'
     ])
 
-    .controller('AppCtrl', function ($scope, $window, $ionicModal, $timeout, ionicMaterialInk, ionicMaterialMotion, store, $location, auth) {
+    .controller('AppCtrl', function ($scope, $window, $ionicModal, $ionicPopover, $timeout, ionicMaterialInk, ionicMaterialMotion, store, $location, auth, HelperService, jwtHelper) {
 
         // With the new view caching in Ionic, Controllers are only called
         // when they are recreated or on app start, instead of every page change.
@@ -21,66 +21,104 @@ angular.module('vocabBuilder.controllers', [
         // Form data for the login modal
         $scope.loginData = {};
 
-        // Create the login modal that we will use later
-        $ionicModal.fromTemplateUrl('templates/login.html', {
-            scope: $scope
-        }).then(function (modal) {
-            $scope.modal = modal;
-        });
-
-        // Triggered in the login modal to close it
-        $scope.closeLogin = function () {
-            $scope.modal.hide();
-        };
-
         // Open the login modal
         $scope.login = function () {
             //$scope.modal.show();
-                auth.signin({
-                    authParams: {
-                        scope: 'openid offline_access',
-                        device: 'Mobile device'
-                    }
-                }, function (profile, token, accessToken, state, refreshToken) {
-                    // Success callback
-                    store.set('profile', profile);
-                    store.set('token', token);
-                    store.set('refreshToken', refreshToken);
-                    $location.path('/');
-                }, function () {
-                    // Error callback
-                });
+            auth.signin({
+                authParams: {
+                    scope: 'openid offline_access',
+                    device: 'Mobile device'
+                }
+            }, function (profile, token, accessToken, state, refreshToken) {
+                // Success callback
+                store.set('profile', profile);
+                store.set('token', token);
+                store.set('refreshToken', refreshToken);
+                $location.path('/');
+                $scope.auth = auth;
+            }, function () {
+                // Error callback
+                HelperService.notify("Could not log you in!", "error");
+            });
+        };
+        $scope.logout = function () {
+            auth.signout();
+            store.remove('profile');
+            store.remove('token');
+            $scope.closePopover();
+            $scope.auth = undefined;
+            $scope.apply();
         };
 
-        // Perform the login action when the user submits the login form
-        $scope.doLogin = function () {
-            console.log('Doing login', $scope.loginData);
-
-            // Simulate a login delay. Remove this and replace with your login
-            // code if using a login system
-            $timeout(function () {
-                $scope.closeLogin();
-            }, 1000);
-        };
         $scope.facebook = function () {
             $window.open(encodeURI("https://www.facebook.com/vikashvverma"), '_system', 'location=yes');
         };
-        ionicMaterialInk.displayEffect();
+
+        $scope.popover = $ionicPopover.fromTemplateUrl('templates/popover.html', {
+            scope: $scope
+        }).then(function (popover) {
+            $scope.popover = popover;
+        });
+        $scope.openPopover = function ($event) {
+            $scope.popover.show($event);
+        };
+        $scope.closePopover = function () {
+            $scope.popover.hide();
+        };
+        //Cleanup the popover when we're done with it!
+        $scope.$on('$destroy', function () {
+            $scope.popover.remove();
+        });
+
+        //Login at startup
+        if (!auth.isAuthenticated) {
+            $scope.login();
+        } else {
+            $scope.auth = auth;
+        }
+
+        //Preferences modal
+        $ionicModal.fromTemplateUrl('templates/preferences.html', {
+            scope: $scope
+        }).then(function (modal) {
+            $scope.preferences = modal;
+        });
+
+        $scope.userItems = [
+            {
+                title: "Logout",
+                icon: "ion-log-out",
+                action: "logout()"
+            },
+            {
+                title: "Preferences",
+                icon: "ion-gear-a",
+                action: "preferences.show();"
+
+            }
+        ];
+        $scope.pres= {
+            trns: [
+                {code: 'hi', title: "Hindi", isChecked: true},
+                {code: 'bn', title: "Bengali", isChecked: false},
+                {code: 'gu', title: "Gujarati", isChecked: false},
+                {code: 'ur', title: "Urdu", isChecked: false},
+                {code: 'te', title: "Telugu", isChecked: false},
+                {code: 'ta', title: "Tamil", isChecked: false},
+                {code: 'ka', title: "Kannada", isChecked: false},
+                {code: 'ja', title: "Japanese", isChecked: false},
+                {code: 'fr', title: "French", isChecked: false},
+                {code: 'de', title: "German", isChecked: false}
+            ]
+        };
+        $scope.save=function(){
+            $scope.preferences.hide();
+        };
+        $timeout(function () {
+            ionicMaterialInk.displayEffect();
+        }, 0);
         //ionicMaterialMotion.ripple();
     })
-
-    .controller('PlaylistsCtrl', function ($scope) {
-        $scope.playlists = [
-            {title: 'Reggae', id: 1},
-            {title: 'Chill', id: 2},
-            {title: 'Dubstep', id: 3},
-            {title: 'Indie', id: 4},
-            {title: 'Rap', id: 5},
-            {title: 'Cowbell', id: 6}
-        ];
-    })
-
-
     .controller('LoginCtrl', function (store, $scope, $location, auth) {
         $scope.login = function () {
             auth.signin({

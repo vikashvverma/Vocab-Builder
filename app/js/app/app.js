@@ -12,7 +12,7 @@ angular.module('vocabBuilder', [
         'angular-jwt'
     ])
 
-    .run(function ($ionicPlatform, auth) {
+    .run(function ($ionicPlatform, $rootScope, auth, store, jwtHelper, $location) {
         $ionicPlatform.ready(function () {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
             // for form inputs)
@@ -28,6 +28,33 @@ angular.module('vocabBuilder', [
         });
         // This hooks all auth events to check everything as soon as the app starts
         auth.hookEvents();
+
+
+        $rootScope.$on('$locationChangeStart', function () {
+            var token = store.get('token');
+            var refreshToken = store.get('refreshToken');
+            if (token) {
+                if (!jwtHelper.isTokenExpired(token)) {
+                    if (!auth.isAuthenticated) {
+                        auth.authenticate(store.get('profile'), token);
+                    }
+                } else {
+                    if (refreshToken) {
+                        if (refreshingToken === null) {
+                            refreshingToken = auth.refreshIdToken(refreshToken).then(function (idToken) {
+                                store.set('token', idToken);
+                                auth.authenticate(store.get('profile'), idToken);
+                            }).finally(function () {
+                                refreshingToken = null;
+                            });
+                        }
+                        return refreshingToken;
+                    } else {
+                        $location.path('/login');// Notice: this url must be the one defined
+                    }                          // in your login state. Refer to step 5.
+                }
+            }
+        });
     })
 
     .config(function ($stateProvider, $urlRouterProvider, authProvider, $httpProvider, jwtInterceptorProvider) {
@@ -110,19 +137,19 @@ angular.module('vocabBuilder', [
             })
             .state('login', { // Notice: this state name matches the loginState property value to set in authProvider.init({...}) below...
                 url: '/login',
-                views: {
-                    'menuContent': {
-                        templateUrl: 'templates/login.html',
-                        controller: 'LoginCtrl'
-                    }
-                }
+                controller: 'LoginCtrl'
+                //views: {
+                //    'menuContent': {
+                //        //templateUrl: 'templates/login.html',
+                //    }
+                //}
             });
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/home');
 
         authProvider.init({
             domain: 'programminggeek.auth0.com',
-            clientID: 'YL6wNwYgl1kz2fnDoscdByFj8MoQnzwK',
+            clientID: 'S6MNYpDy9EEmj0DO6jch3RQfFOtEvzOI',
             loginState: 'login' // This is the name of the state where you'll show the login, which is defined above...
         });
     });
