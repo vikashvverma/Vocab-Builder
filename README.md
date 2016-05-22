@@ -11,7 +11,13 @@ Download the App at Play Store: https://play.google.com/store/apps/details?id=in
 - examples
 - save word locally
 - browse saved words
-- delete saved words﻿
+- delete saved words
+- User Signup/Login
+- Set preferences
+- More than 1000 locally saved words
+- Check grammar/spelling of any text/paragraph
+- Check your pronunciation
+- Translation according to your preferences
 
 # Demo
 https://play.google.com/store/apps/details?id=in.programminggeek.VocabBuilder
