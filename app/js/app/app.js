@@ -134,15 +134,6 @@ angular.module('vocabBuilder', [
                         controller: 'SpellCheckController'
                     }
                 }
-            })
-            .state('login', { // Notice: this state name matches the loginState property value to set in authProvider.init({...}) below...
-                url: '/login',
-                controller: 'LoginCtrl'
-                //views: {
-                //    'menuContent': {
-                //        //templateUrl: 'templates/login.html',
-                //    }
-                //}
             });
         // if none of the above states are matched, use this as the fallback
         $urlRouterProvider.otherwise('/app/home');
