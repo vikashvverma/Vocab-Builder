@@ -43,7 +43,7 @@
                         <ion-item ng-repeat="word in offlineWords track by $index" class="ink">
                             <h2 class="success">{{word.slug}}</h2>
                             <p ng-bind-html="word.back[1].content" class="royal"></p>
-                            <p ng-bind-html="word.back[2].content" class="balanced"></p>
+                            <p ng-bind-html="word.back[2].content" class="balanced" style="    white-space: inherit;"></p>
                         </ion-item>
                     </ion-list>
                 </ion-content>
