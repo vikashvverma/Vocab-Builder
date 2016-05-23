@@ -1,0 +1,27 @@
+<ion-view view-title="Words" cache-view="false">
+    <ion-tabs
+        class="tabs-balanced tabs-icon-top tabs-icon-top tabs-striped tabs-top tabs-background-positive tabs-color-light"
+        ng-init="random=false;">
+
+        <ion-tab title="Today's Word" icon-on="icon ion-ios-calendar" icon-off="icon ion-ios-calendar">
+            <!-- Tab 1 content -->
+            <ion-view>
+                <ion-content class="padding">
+                    <span ng-include src="'templates/word-template.html'" ng-controller="MainController"></span>
+                </ion-content>
+            </ion-view>
+        </ion-tab>
+
+        <ion-tab title="Random Word" icon-on="ion-ios-shuffle-strong" icon-off="ion-ios-shuffle-strong" >
+            <!-- Tab 2 content -->
+            <ion-view cache-view="false" active>
+                <ion-content class="padding">
+                    <span ng-include src="'templates/word-template.html'"
+                          ng-init="random();" ng-controller="RandomController"></span>
+                </ion-content>
+            </ion-view>
+        </ion-tab>
+
+    </ion-tabs>
+</ion-view>
+

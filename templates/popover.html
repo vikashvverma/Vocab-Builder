@@ -1,0 +1,23 @@
+<ion-popover-view>
+    <div class="bar bar-header bar-royal">
+        <img ng-src="{{auth.profile.picture}}" style="width:45px;height:44px;border-radius: 50%;">
+        <h1 class="title">Hi, {{auth.profile.name.split("@")[0] | uppercase}}!</h1>
+    </div>
+    <ion-content style="margin-top: 49px;">
+        <div class="list">
+            <a class="item item-icon-right royal" ng-repeat="item in userItems track by $index"
+               ng-click="{{item.action}}">
+                <i class="icon {{item.icon}} royal"></i>
+                {{item.title}}
+                <span class="item-note" ng-if="item.note">{{item.note}} </span>
+            </a>
+            <!--<a class="item item-icon-left"> <i class="icon ion-mic-a"></i>Record album-->
+            <!--<span class="item-note"> Grammy </span>-->
+            <!--</a>-->
+            <!--<a class="item item-icon-left">-->
+            <!--<i class="icon ion-person-stalker"></i> Friends-->
+            <!--<span class="badge badge-assertive">0</span>-->
+            <!--</a>-->
+        </div>
+    </ion-content>
+</ion-popover-view>

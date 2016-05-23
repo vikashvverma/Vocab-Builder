@@ -1,0 +1,15 @@
+{
+  "name": "angular-webspeech-directive",
+  "version": "0.0.1",
+  "dependencies": {
+    "modernizer": "~2.8.2"
+  },
+  "main": [
+    "dist/angular-webspeech-directive.min.js"
+  ],
+  "devDependencies": {
+    "angular-unstable": "latest",
+    "angular-mocks": "latest",
+    "jquery": "latest"
+  }
+}

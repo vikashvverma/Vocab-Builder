@@ -1,0 +1,116 @@
+<ion-view view-title="Result for {{result.word}}">
+    <ion-tabs
+        class="tabs-balanced  tabs-striped tabs-top tabs-background-positive tabs-color-light"
+        ng-init="random=false;">
+        <button ng-if="!isSaved" id="fab" class="button button-positive button-fab button-fab-bottom-right"
+                ng-click="toggle(true);" style="top:49px;">
+            <i class="icon ion-ios-cloud-download-outline"></i>
+        </button>
+        <button ng-if="isSaved" class="button button-assertive button-fab button-fab-bottom-right"
+                ng-click="toggle(false);" style="top:49px;">
+            <i class="icon ion-close-round"></i>
+        </button>
+        <ion-tab title="Word">
+            <!-- Tab 1 content -->
+            <ion-view class="active">
+                <ion-content class="padding">
+                    <!--<h2 class="royal" ng-click="speak();">{{result.word}}</h2>-->
+                    <p style="font-size: 35px;line-height: 35px; letter-spacing: 0.1px; ">
+                        <span ng-click="speak();" class="positive" style="margin-right: 10px;">{{result.word}}</span>
+                        <i class="icon ion-ios-mic positive" ng-click="record();" ng-if="micon"></i>
+                        <i class="icon ion-ios-mic-off assertive" ng-click="record();" ng-if="!micon"></i>
+                    </p>
+                    <p>
+                        {{result.pronunciation}}
+                        <i class="icon ion-volume-high" on-tap="play();" ng-click="play();" style="margin-left:10px;"
+                           ng-if="result.audio"></i>
+                    </p>
+                    <p ng-if="translation.length">
+                    <span class="royal">
+                        <i>trn</i>:
+                        <span ng-repeat="trn in translation track by $index">
+                            {{trn.trn}}({{trn.lan}})
+                        </span>
+                    </span>
+                    </p>
+                    <p>
+                        <span ng-if="recognizedText" class="calm">
+                            <i>Recognized Text</i>: <span class="royal">{{recognizedText}}</span>
+                        </span>
+                    </p>
+                    <p ng-if="result.note">{{result.note}}</p>
+                    <p ng-if="result.etymologies">{{result.etymologies[0]}}</p>
+                </ion-content>
+            </ion-view>
+        </ion-tab>
+        <ion-tab ng-if="result.examples" title="Examples">
+            <!-- Tab 2 content -->
+            <ion-view>
+                <ion-content class="padding">
+                    <h2 class="royal">Examples:</h2>
+                    <div ng-repeat="item in result.examples">
+                        <h5 ng-if="item.text"><i class="royal ion-arrow-right-c"></i> {{item.text}}</h5>
+                        <cite style="font-size: 12px;font-style: italic;"
+                              ng-if="item.title"><i>{{item.title}}</i></cite>
+                    </div>
+                </ion-content>
+            </ion-view>
+        </ion-tab>
+
+        <ion-tab ng-if="result.definitions" title="Definitions">
+            <!-- Tab 2 content -->
+            <ion-view cache-view="false">
+                <ion-content class="padding">
+                    <h2 class="positive">Definitions:</h2>
+                    <div ng-repeat="item in result.definitions">
+                        <p><i class="positive ion-arrow-right-c"></i> {{item.partOfSpeech}}</p>
+                        <p ng-if="item.text">{{item.text}}</p>
+                        <p ng-if="item.source">Source: {{item.source}}</p>
+                    </div>
+                </ion-content>
+            </ion-view>
+        </ion-tab>
+
+        <ion-tab ng-if="result.relatedWords" title="Related">
+            <!-- Tab 2 content -->
+            <ion-view cache-view="false" id="related-words">
+                <ion-content class="padding">
+                    <h2 class="positive">Related Words:</h2>
+                    <!-- add `multiple` attribute to allow multiple sections to open at once -->
+                    <v-accordion class="vAccordion--default" multiple control="accordion"
+                                 onexpand="expandCallback(index, id)" oncollapse="collapseCallback(index, id)">
+
+                        <!-- add expanded attribute to open the section -->
+                        <v-pane expanded ng-repeat="type in result.relatedWords track by $index">
+                            <v-pane-header>
+                                {{type.relationshipType}}
+                            </v-pane-header>
+
+                            <v-pane-content id="type{{$index}}">
+                                <div class="list">
+                                    <a class="item" ng-repeat="word in type.words">{{word}}</a>
+                                </div>
+                            </v-pane-content>
+                        </v-pane>
+
+                    </v-accordion>
+                </ion-content>
+            </ion-view>
+        </ion-tab>
+
+        <ion-tab ng-if="result.phrases" title="Phrases">
+            <!-- Tab 2 content -->
+            <ion-view cache-view="false">
+                <ion-content class="padding">
+                    <h2 class="positive">Phrases:</h2>
+                    <ion-list>
+                        <ion-item ng-repeat="phrases in result.phrases" class="positive ink">
+                            {{phrases.gram1}} {{ phrases.gram2}}
+                        </ion-item>
+                    </ion-list>
+                </ion-content>
+            </ion-view>
+        </ion-tab>
+
+    </ion-tabs>
+</ion-view>

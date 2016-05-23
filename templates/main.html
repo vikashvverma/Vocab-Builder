@@ -1,0 +1,56 @@
+<ion-view view-title="Today's Word">
+    <ion-content>
+        <div class="spinner" ng-if="!wotd.word && !refresh">
+            <ion-spinner icon="android"></ion-spinner>
+        </div>
+        <button ng-if="refresh" id="refresh" class="button button-positive button-fab button-fab-bottom-right"
+                ng-click="refreshPage();" style="top:49px;left:0;right:0;margin: 0 auto;">
+            <i class="icon ion-ios-reload"></i>
+        </button>
+        <div class="list card" ng-if="wotd.word">
+
+            <div class="item item-text-wrap">
+                <p style="font-size: 35px;line-height: 35px; letter-spacing: 0.1px; ">
+                    <span ng-click="speak();" class="positive" style="margin-right: 10px;">{{wotd.word}}</span>
+                    <i class="icon ion-ios-mic positive" ng-click="record();" ng-if="micon"></i>
+                    <i class="icon ion-ios-mic-off assertive" ng-click="record();" ng-if="!micon"></i>
+                </p>
+                <p style="font-size: 20px; letter-spacing: 0.1px; ">
+                    {{wotd.pronunciation}}
+                    <i class="icon ion-volume-high" on-tap="play();" ng-click="play();" style="margin-left:10px;"
+                       ng-if="wotd.audio"></i>
+                </p>
+                <p ng-if="translation.length">
+                    <span class="royal">
+                        <i>trn</i>:
+                        <span ng-repeat="trn in translation track by $index">
+                            {{trn.trn}}({{trn.lan}})
+                        </span>
+                    </span>
+                </p>
+                <p>
+                        <span ng-if="recognizedText" class="calm">
+                            <i>Recognized Text</i>: <span class="royal">{{recognizedText}}</span>
+                        </span>
+                </p>
+                <p ng-if="wotd.note">{{wotd.note}}</p>
+            </div>
+
+            <div class="item item-body">
+                <h2 class="positive">Definitions:</h2>
+                <div ng-repeat="item in wotd.definitions">
+                    <p><i class="positive ion-arrow-right-c"></i> {{item.partOfSpeech}}</p>
+                    <p>{{item.text}}</p>
+                    <p>Source: {{item.source}}</p>
+                </div>
+                <h2 class="royal">Examples:</h2>
+                <div ng-repeat="item in wotd.examples">
+                    <h2><i class="royal ion-arrow-right-c"></i> {{item.text}}</h2>
+                    <cite style="font-size: 12px;font-style: italic;"><i>{{item.title}}</i></cite>
+                </div>
+            </div>
+
+        </div>
+    </ion-content>
+</ion-view>
+

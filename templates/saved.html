@@ -1,0 +1,55 @@
+<ion-view view-title="Saved">
+    <ion-tabs
+        class="tabs-balanced tabs-icon-top tabs-icon-top tabs-striped tabs-top tabs-background-positive tabs-color-light">
+
+        <ion-tab title="Word" icon-on="icon ion-archive" icon-off="icon ion-archive">
+            <ion-view>
+                <ion-content>
+                    <ion-list show-delete="shouldShowDelete"
+                              show-reorder="shouldShowReorder"
+                              can-swipe="listCanSwipe">
+                        <ion-item ng-repeat="word in words track by $index" class="ink" href="#/app/saved/{{word.id}}">
+                            {{word.word}}
+                            <ion-option-button class="button button-fab button-assertive icon ion-close"
+                                               ng-click="removeWord(word.id);"></ion-option-button>
+                        </ion-item>
+                    </ion-list>
+                </ion-content>
+            </ion-view>
+        </ion-tab>
+
+        <ion-tab title="Search Result" icon-on="icon ion-ios-search" icon-off="icon ion-ios-search">
+            <ion-view>
+                <ion-content>
+                    <ion-list show-delete="shouldShowDelete"
+                              show-reorder="shouldShowReorder"
+                              can-swipe="listCanSwipe">
+                        <ion-item ng-repeat="word in results track by $index" class="ink" ng-click="goto(word);"
+                                  href="#/app/word/result">
+                            {{word.word}}
+                            <ion-option-button
+                                class="button button-fab button-assertive icon ion-close"
+                                ng-click="removeResult(word.word);"></ion-option-button>
+                        </ion-item>
+                    </ion-list>
+                </ion-content>
+            </ion-view>
+        </ion-tab>
+
+        <ion-tab title="Word List" icon-on="icon ion-android-archive" icon-off="icon ion-android-archive">
+            <ion-view>
+                <ion-content>
+                    <ion-list>
+                        <ion-item ng-repeat="word in offlineWords track by $index" class="ink">
+                            <h2 class="success">{{word.slug}}</h2>
+                            <p ng-bind-html="word.back[1].content" class="royal"></p>
+                            <p ng-bind-html="word.back[2].content" class="balanced" style="    white-space: inherit;"></p>
+                        </ion-item>
+                    </ion-list>
+                </ion-content>
+            </ion-view>
+        </ion-tab>
+
+    </ion-tabs>
+</ion-view>
+
