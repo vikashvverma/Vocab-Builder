@@ -99,7 +99,7 @@ angular.module('vocabBuilder.controllers')
         $scope.record = function () {
             var recognition;
             //Try HTML5 API
-            if (webkitSpeechRecognition) {
+            if (typeof webkitSpeechRecognition != "undefined") {
                 recognition = new webkitSpeechRecognition()
             } else {
                 //Fallback to cordova plugin
